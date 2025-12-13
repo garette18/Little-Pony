@@ -2,64 +2,77 @@
 <html lang="en">
 
 <head>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style/style.css">
 </head>
 
-<body>
- <div class="container mb-4">
-  <div class="row">
-   <div class="col">
-    <div class="display-3">
-     Rick and Morty
-    </div>
-   </div>
-    </div>
-   </div>
-
- <div class="container">
-  <div class="row" id="contents">
-  
-  </div>
- </div>
-
- <script>
-  var contents = document.getElementById("contents");
-
-
-  const getCharacters = async () => {
-    const response = await fetch('https://rickandmortyapi.com/api/character');
-    const data = await response.json();
-    const characters = data.results;
-    for(var i = 0; i < 20; i++){
-      const character = characters[i]; 
-      
-      const id = character.id;
-      const title = character.name;
-      const image = character.image; 
-
-      contents.innerHTML += `
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="card my-3 shadow p-3 rounded-5 text-center h-100">
-            <div class="mx-auto rounded-circle card-img-top-container" style="background-color: #00b0c5;">
-              <img src="${image}" class="w-100">
-            </div>
-            <div class="my-3 h6">
-              <strong>#${id} ${title}</strong>
+<body data-bs-theme="dark">
+  <div class="container-fluid p-0 top-0 fixed-top">
+    <div class="row g-0">
+      <div class="col-12 text-light">
+        <nav class="navbar navbar-expand-lg p-4">
+          <div class="container flex-lg-column align-items-lg-center">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+              <ul class="navbar-nav nav-underline nav-menu">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Comics</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Characters</a>
+              </ul>
             </div>
           </div>
-        </div>
-      `;
-    }
-  }
+        </nav>
+      </div>
+    </div>
+  </div>
 
-  getCharacters();
- </script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-  crossorigin="anonymous"></script>
+  <div class="container-fluid p-0 position-relative">
+    <div class="row g-0">
+      <div class="col position-relative">
+        <img src="assets/images/bg1.jpg" class="img-fluid w-100" style="height: 800px; object-fit: cover;">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-dark bg-opacity-50 text-center text-white">
+        <h1 class="overlay-text display-4">Hello, Pony Lover!</h1>
+        <p class="overlay-text fs-4">Step into a world of friendship, magic, and pastel ponies.</p>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid p-0">
+        <div class="container py-4 text-center">
+            <h1 class="title-font display-3">Little Pony Episode Songs</h1>
+        </div>
+        <div id="songCarousel" class="carousel slide" data-bs-ride="carousel"> 
+            <div class="carousel-indicators" id="carouselIndicators">
+            </div>
+
+            <div class="carousel-inner" id="carouselInner">
+                <div class="p-5 text-center text-secondary">Loading episodes...</div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#songCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#songCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
