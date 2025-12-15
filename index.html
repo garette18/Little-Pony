@@ -4,16 +4,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Pony</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style/style.css">
+  <link href="assets/images/logo.jpg" rel="icon">
 </head>
 
-<body data-bs-theme="dark">
-  <div class="container-fluid p-0 top-0 fixed-top">
+<body data-bs-theme="light">
+  <div class="container-fluid p-0 top-0 fixed-top bg-light bg-opacity-10">
     <div class="row g-0">
-      <div class="col-12 text-light">
+      <div class="col-12 font">
         <nav class="navbar navbar-expand-lg p-4">
           <div class="container flex-lg-column align-items-lg-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -26,10 +28,10 @@
                   <a class="nav-link" aria-current="page" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Comics</a>
+                  <a class="nav-link" href="comics.html">Comics</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Characters</a>
+                  <a class="nav-link" href="characters.html">Characters</a>
               </ul>
             </div>
           </div>
@@ -42,37 +44,168 @@
     <div class="row g-0">
       <div class="col position-relative">
         <img src="assets/images/bg1.jpg" class="img-fluid w-100" style="height: 800px; object-fit: cover;">
-        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-dark bg-opacity-50 text-center text-white">
-        <h1 class="overlay-text display-4">Hello, Pony Lover!</h1>
-        <p class="overlay-text fs-4">Step into a world of friendship, magic, and pastel ponies.</p>
-      </div>
+        <div
+          class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-dark bg-opacity-50 text-center text-white">
+          <h1 class="font display-4">Hello, Pony Lover!</h1>
+          <p class="font fs-4">Step into a world of friendship, magic, and pastel ponies.</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid p-0">
-        <div class="container py-4 text-center">
-            <h1 class="title-font display-3">Little Pony Episode Songs</h1>
-        </div>
-        <div id="songCarousel" class="carousel slide" data-bs-ride="carousel"> 
-            <div class="carousel-indicators" id="carouselIndicators">
-            </div>
-
-            <div class="carousel-inner" id="carouselInner">
-                <div class="p-5 text-center text-secondary">Loading episodes...</div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#songCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#songCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+  <div class="container my-5">
+    <div class="text-center mb-4">
+      <h1 class="font display-3">Little Pony Songs</h1>
     </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators" id="carouselIndicators"></div>
+
+      <div class="carousel-inner" id="carouselInner"></div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+
+    <div class="container my-5">
+      <div class="text-center mb-4">
+        <h1 class="font display-3">Little Pony Episodes</h1>
+      </div>
+
+      <div class="row g-4" id="episodeContainer">
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center my-4">
+        <button onclick="prevPage()" class="btn btn-outline-success">Previous</button>
+        <span id="pageText">Page 1</span>
+        <button onclick="nextPage()" class="btn btn-outline-success">Next</button>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          var carouselInner = document.getElementById("carouselInner");
+          var carouselIndicators = document.getElementById("carouselIndicators");
+
+          var index = 0;
+
+          const getSongs = async () => {
+            const response = await fetch("https://ponyapi.net/v1/song/all");
+            const songData = await response.json();
+
+            songData.data.forEach((song) => {
+              const title = song.name || "Unknown Song";
+              const artist = song.musicby || "Unknown Artist";
+              const album = song.episode || "";
+              const videoUrl = song.video || "";
+
+              if (!videoUrl) return;
+
+              const videoID = videoUrl.split("v=")[1];
+              if (!videoID) return;
+
+              const thumbUrl = `https://img.youtube.com/vi/${videoID}/hqdefault.jpg`;
+
+              carouselIndicators.innerHTML += `
+        <button type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="${index}"
+          class="${index === 0 ? "active" : ""}"
+          aria-current="${index === 0 ? "true" : "false"}"
+          aria-label="Slide ${index + 1}">
+        </button>
+      `;
+
+              carouselInner.innerHTML += `
+        <div class="carousel-item ${index === 0 ? "active" : ""}">
+          <div class="position-relative">
+            <img src="${thumbUrl}" class="d-block w-100" style="height:500px; object-fit:cover;">
+            <a href="${videoUrl}" target="_blank"
+               class="btn btn-success position-absolute top-50 start-50 translate-middle rounded-pill">
+               Watch on YouTube
+            </a>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-light bg-opacity-50 rounded p-3">
+            <h5>${title}</h5>
+            <p>${artist} ${album ? "• " + album : ""}</p>
+          </div>
+        </div>
+      `;
+
+              index++;
+            });
+          };
+
+          getSongs();
+
+          var contentArea = document.getElementById("episodeContainer");
+          var pageText = document.getElementById("pageText");
+
+          var episodes = [];
+          var page = 1;
+          var perPage = 6;
+
+          window.prevPage = function () {
+            if (page === 1) return;
+            page--;
+            updateEpisodes();
+          };
+
+          window.nextPage = function () {
+            const maxPage = Math.ceil(episodes.length / perPage);
+            if (page >= maxPage) return;
+            page++;
+            updateEpisodes();
+          };
+
+          const updateEpisodes = () => {
+            pageText.innerHTML = "Page " + page;
+            contentArea.innerHTML = "";
+
+            for (
+              let i = (perPage * page) - (perPage - 1);
+              i <= page * perPage && i <= episodes.length;
+              i++
+            ) {
+              const ep = episodes[i - 1];
+
+              contentArea.innerHTML += `
+       <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow rounded-4">
+            <img src="${ep.image}" class="card-img-top"
+                 style="height:180px; object-fit:cover;" alt="${ep.name}">
+            <div class="card-body text-center">
+              <h5>${ep.name}</h5>
+              <p class="small">
+                Season ${ep.season}, Ep ${ep.episode}<br>${ep.airdate}
+              </p>
+              <a href="${ep.link}" target="_blank"
+                 class="btn btn-success rounded-pill">Watch</a>
+            </div>
+          </div>
+        </div>
+      `;
+            }
+          };
+
+          const getEpisodes = async () => {
+            const response = await fetch("https://ponyapi.net/v1/episode/all");
+            const result = await response.json();
+            episodes = result.data || [];
+            updateEpisodes();
+          };
+
+          getEpisodes();
+
+        });
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
