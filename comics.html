@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Pony</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style/style.css">
+  <link href="assets/images/logo.jpg" rel="icon">
+</head>
+
+<body data-bs-theme="light">
+  <div class="container-fluid p-0 top-0 fixed-top bg-light bg-opacity-10">
+    <div class="row g-0">
+      <div class="col-12 font">
+        <nav class="navbar navbar-expand-lg p-4">
+          <div class="container flex-lg-column align-items-lg-center">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+              <ul class="navbar-nav nav-underline nav-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="comics.html">Comics</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="characters.html">Characters</a>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid p-0 position-relative">
+    <div class="row g-0">
+      <div class="col position-relative">
+        <img src="assets/images/bg3.avif" class="img-fluid w-100" style="height: 350px; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+
+  <!-- character cards -->
+  <div class="container py-5">
+    <div class="row min-vh-100 top-0 p-0 align-items-center text-center">
+      <div class="col p-5 bg-body-tertiary bg-opacity-50 rounded-5 shadow-lg">
+        <h2 class="font display-3 text-center py-4">Little Pony Comics</h2>
+
+        <div class="row g-4" id="contents">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var contents = document.getElementById("contents");
+    const getComics = async () => {
+      const response = await fetch("https://ponyapi.net/v1/comics-story/all");
+      const comicsData = await response.json();
+
+      for (let i = 0; i <= 50; i++) {
+        const comicsArray = comicsData.data;
+        const comics = comicsArray[i];
+
+        const comicsID = comics.id;
+        const comicsName = comics.name;
+        const comicsSeries = comics.series;
+        const image = comics.image;
+
+        contents.innerHTML += `
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow h-100">
+                        <div class="ratio ratio-1x1 bg-secondary overflow-hidden" style="--bs-aspect-ratio: 100%;">
+                            <img src=`+ image + ` class="card-img-top w-100 h-100 object-fit-cover">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">`+ comicsName + `</h5>
+                            <p class="card-text"> Comics Series: <strong>`+ comicsSeries + `</strong></p>
+                            <p class="card-text">ID: <strong>`+ comicsID + `</strong></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+    }
+    getComics();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
