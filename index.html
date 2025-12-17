@@ -13,8 +13,8 @@
 </head>
 
 <body data-bs-theme="light">
-  <div class="container-fluid p-0 top-0 fixed-top bg-light bg-opacity-13">
-    <div class="row g-0">
+  <div class="container-fluid p-0 top-0 fixed-top bg-opacity-13" style="background-color: lightpink;">
+    <div class="row g-3">
       <div class="col-12 font">
         <nav class="navbar navbar-expand-lg p-4">
           <div class="container flex-lg-column align-items-lg-center">
@@ -60,7 +60,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <!-- carousel -->
+
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators" id="indicator">
               </div>
@@ -108,7 +108,7 @@
               </li>
             </ul>
           </nav>
-          <div class="h5 mb-0" id="pageText">Page 1</div>
+          <div class="h6 font mb-0" id="pageText">Page 1</div>
         </div>
       </div>
 
@@ -116,7 +116,7 @@
         var contents1 = document.getElementById("contents1");
         var pageText = document.getElementById("pageText");
         var page = 1;
-        var itemsPerPage = 8;
+        var itemsPerPage = 9;
         function nextPage() {
           page++;
           contents1.innerHTML = "";
@@ -152,14 +152,14 @@
             const image = episodes.image;
 
             contents1.innerHTML +=
-              '<div class="col-sm-6 col-md-4 col-lg-3">' +
+              '<div class="col-12 col-md-6 col-lg-4">' +
               '<div class="card shadow h-100">' +
               '<div class="ratio ratio-1x1 bg-secondary bg-opacity-10 overflow-hidden">' +
               '<img src="' + image + '" class="card-img-top w-100 h-100 object-fit-cover">' +
               '</div>' +
               '<div class="card-body">' +
               '<h6 class="text-success small mb-1">Episode #' + episodesID + '</h6>' +
-              '<h5 class="card-title fw-bold">' + episodesName + '</h5>' +
+              '<h5 class="card-title font">' + episodesName + '</h5>' +
               '<p class="card-text small mb-1 text-muted">Written by: <br><strong>' + episodesWrittenby + '</strong></p>' +
               '<p class="card-text small text-muted">Storyboard: <br><strong>' + episodesStoryboard + '</strong></p>' +
               '</div>' +
@@ -170,8 +170,6 @@
 
         getEpisodes();
       </script>
-
-      <!-- ex for iframe. src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&start=90" -->
       <script>
         var indicator = document.getElementById("indicator");
         var content1 = document.getElementById("content1");
@@ -187,7 +185,6 @@
             const songID = song.id;
             const songName = song.name;
 
-            // getting video url in this format: https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&start=90
             const standardWatchURL = song.video;
             const startOfId = standardWatchURL.indexOf("v=") + 2;
             const videoId = standardWatchURL.substring(startOfId, startOfId + 11);

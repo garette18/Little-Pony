@@ -12,8 +12,8 @@
 </head>
 
 <body data-bs-theme="light">
-  <div class="container-fluid p-0 top-0 fixed-top bg-light bg-opacity-10">
-    <div class="row g-0">
+<div class="container-fluid p-0 top-0 fixed-top bg-opacity-13" style="background-color: lightpink;">    
+  <div class="row g-3">
       <div class="col-12 font">
         <nav class="navbar navbar-expand-lg p-4">
           <div class="container flex-lg-column align-items-lg-center">
@@ -82,13 +82,13 @@
         const bgColor = colors[pony.kind] || colors.default;
 
         contents.innerHTML += `
-            <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="col-12 col-md-6 col-lg-4"> 
                 <div class="card shadow h-100">
                     <div class="ratio ratio-1x1 overflow-hidden" style="--bs-aspect-ratio: 100%; background-color: ` + bgColor + `;">
                         <img src="` + image + `" class="card-img-top w-100 h-100 object-fit-cover">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title fw-bold">` + name + `</h5>
+                        <h5 class="card-title font">` + name + `</h5>
                         <p class="card-text">ID: <strong>` + ponyID + `</strong></p>
                         <div class="mt-2">
                              <span class="badge rounded-pill" style="background-color: ` + bgColor + `; color: #333;"> Kind: ` + kind + ` </span>

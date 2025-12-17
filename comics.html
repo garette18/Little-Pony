@@ -13,8 +13,8 @@
 </head>
 
 <body data-bs-theme="light">
-  <div class="container-fluid p-0 top-0 fixed-top bg-light bg-opacity-10">
-    <div class="row g-0">
+<div class="container-fluid p-0 top-0 fixed-top bg-opacity-13" style="background-color: lightpink;">    
+  <div class="row g-3">
       <div class="col-12 font">
         <nav class="navbar navbar-expand-lg p-4">
           <div class="container flex-lg-column align-items-lg-center">
@@ -47,7 +47,6 @@
     </div>
   </div>
 
-  <!-- character cards -->
   <div class="container py-5">
     <div class="row min-vh-100 top-0 p-0 align-items-center text-center">
       <div class="col p-5 bg-body-tertiary bg-opacity-50 rounded-5 shadow-lg">
@@ -76,13 +75,13 @@
         const image = comics.image;
 
         contents.innerHTML += `
-            <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="col-12 col-md-6 col-lg-4">
                     <div class="card shadow h-100">
                         <div class="ratio ratio-1x1 bg-secondary overflow-hidden" style="--bs-aspect-ratio: 100%;">
                             <img src=`+ image + ` class="card-img-top w-100 h-100 object-fit-cover">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">`+ comicsName + `</h5>
+                            <h5 class="card-title font">`+ comicsName + `</h5>
                             <p class="card-text"> Comics Series: <strong>`+ comicsSeries + `</strong></p>
                             <p class="card-text">ID: <strong>`+ comicsID + `</strong></p>
                         </div>
