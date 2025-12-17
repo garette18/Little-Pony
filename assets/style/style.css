@@ -1,2 +1,15 @@
 .font { 
     font-family: 'Fredoka One', cursive; }
+.card {
+  transition: transform 0.3s ease, shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Aangat ang card */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+.bg-body-tertiary {
+  background: rgba(255, 255, 255, 0.7) !important; /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Malabong background sa likod ng card container */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
